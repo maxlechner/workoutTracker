@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
+// set up new Schema for creating a workout
 const workoutSchema = new Schema(
     {
         day: {
@@ -54,3 +54,9 @@ const workoutSchema = new Schema(
     }
 
 );
+
+// use mongoosse to run the workoutSchema from above
+
+const Workout = mongoose.model("Workout", workoutSchema);
+
+module.exports = Workout;
