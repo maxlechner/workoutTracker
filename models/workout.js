@@ -64,7 +64,7 @@ function totalDuration(self) {
 }
 
 workoutSchema.virtual("totalDuration").get(function () {
-return totalDuration(this.exercises)
+    return totalDuration(this.exercises)
 });
 // use mongoosse to run the workoutSchema from above
 
