@@ -16,7 +16,7 @@ app.use(express.static("public"));
 
 // connection to mongoose for local development
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost/workout_db',
+    process.env.MONGODB_URI || 'mongodb://localhost/workout',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -25,8 +25,12 @@ mongoose.connect(
     }
 );
 
-require("./routes/api.js")(app);
-require("./routes/html.js")(app);
+// require("./routes/api.js")(app);
+// require("./routes/html.js")(app);
+
+app
+    .use(require("./routes/html.js"))
+    .use(require("./routes/api.js"));
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
