@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config();
+
+require("./models");
+
 const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 // process dynamic data
@@ -13,7 +16,7 @@ app.use(express.static("public"));
 
 // connection to mongoose for local development
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost/workout',
+    process.env.MONGODB_URI || 'mongodb://localhost/workout_db',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -22,6 +25,9 @@ mongoose.connect(
     }
 );
 
-app
-    .use(require("./routes/html.js"))
-    .use(require("./routes/api.js"));
+require("./routes/api.js")(app);
+require("./routes/html.js")(app);
+
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
+  });
